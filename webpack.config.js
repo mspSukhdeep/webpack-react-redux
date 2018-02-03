@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -19,8 +20,11 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
+    	new ManifestPlugin({
+  			fileName: 'asset-manifest.json'
+		}),
         new HtmlWebpackPlugin({
-          template: 'app/index.tpl.html',
+          template: 'app/index.html',
           inject: 'body',
           filename: 'index.html'
         }),
@@ -31,19 +35,7 @@ module.exports = {
           'process.env.NODE_ENV': JSON.stringify('development')
         })
     ],
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: false
-    },
     module: {
-        preLoaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'eslint'
-            }
-        ],
         loaders: [
             {
                 test: /\.js?$/,
@@ -59,7 +51,19 @@ module.exports = {
                 loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]!sass'
             },
             { test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' }
+            { test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/, loader: 'file' },
+            {
+              test: /\.css$/,
+              loader: 'style-loader'
+            },
+            {
+              test: /\.css$/,
+              loader: 'css-loader',
+              query: {
+                minimize : true,
+                localIdentName: '[name]__[local]___[hash:base64:5]'
+              }
+            }
         ]
     }
 };

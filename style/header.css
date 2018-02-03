@@ -1,0 +1,94 @@
+header{
+    background-color: #099181;
+    padding: 10px;
+    color: #111;
+}
+
+.logo {
+    float: left;
+    width: 210px;
+    display: block;
+}
+
+.logo__img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.usr_sctn {
+    float: right;
+    height: 28px;
+    position: relative;
+}
+
+.usr_img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.usr_drpdwn{
+    position: absolute;
+    right: 0;
+    width: 200px;
+    z-index:2;
+    text-align: center;
+    top:28px;
+    border-radius: 1px;
+    border:0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.usr_drpdwn__txt{
+    margin-top: 10px;
+}
+
+.usr_drpdwn--vsbl{
+    height: auto;
+}
+
+.usr_drpdwn_inr:before{
+    content: '';
+    border-style: solid;
+    border-width: 0px 7px 7px 7px;
+    border-color: transparent transparent #fff transparent;
+    position: absolute;
+    top: -6px;
+    right: 6px;
+}
+.usr_drpdwn_inr{
+    position: relative;
+    margin-top: 7px;
+    background-color: #fff;
+    padding: 7px;
+    border:1px solid #dfe1e8;
+}
+.usr_drpdwn_inr--info{
+    text-align: left;
+    padding: 0
+}
+
+.usr_drpdwn__sctn{
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    color: #111;
+}
+.usr_drpdwn__sctn + .usr_drpdwn__sctn{
+    border-top: 1px solid #dfe1e8;
+}
+.usr_drpdwn__name{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.usr_drpdwn__email{
+    color: #444;
+    margin-top: 3px;
+}
+.usr_drpdwn__my-cb{
+    background: url('http://assets.mspcdn.net/f_auto,c_scale,w_32/bonus_in/logo/large/coin_colour.png') no-repeat center left / 16px;
+    padding-left: 23px;
+}

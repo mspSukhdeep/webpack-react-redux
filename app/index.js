@@ -1,29 +1,26 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
-import { configureStore, history } from './store/configureStore';
-import Root from './containers/Root';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { BrowserRouter } from 'react-router-dom';
+import ReactPromise from 'redux-promise';
 
-const store = configureStore();
+import history from './utils/history'
+import App from './components/app';
+import reducers from './reducers';
+import ScrollToTop from './utils/ScrollTop';
+import registerServiceWorker from './registerServiceWorker';
 
-render(
-    <AppContainer>
-        <Root store={store} history={history} />
-    </AppContainer>,
-    document.getElementById('root')
-);
+const createStoreWithMiddleware = applyMiddleware(ReactPromise)(createStore);
 
-if (module.hot) {
-    module.hot.accept('./containers/Root', () => {
-        const newConfigureStore = require('./store/configureStore');
-        const newStore = newConfigureStore.configureStore();
-        const newHistory = newConfigureStore.history;
-        const NewRoot = require('./containers/Root').default;
-        render(
-            <AppContainer>
-                <NewRoot store={newStore} history={newHistory} />
-            </AppContainer>,
-            document.getElementById('root')
-        );
-    });
-}
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <BrowserRouter history={history} basename="/m/pwa" >
+        <ScrollToTop>
+            <App />
+        </ScrollToTop>
+    </BrowserRouter>
+  </Provider>
+  , document.querySelector('.container'));
+
+registerServiceWorker();

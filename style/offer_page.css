@@ -1,0 +1,34 @@
+.ctgry-hdr{
+    background-color: #fff;
+    text-transform: capitalize;
+    font-size: 15px;
+    color: #111;
+    font-weight: 500;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    background: url(http://assets.mspcdn.net/f_auto/bonus_in/icon/back.png) no-repeat center left 10px / 13px;
+    padding-left: 30px;
+}
+.ctgry-fltr__wrpr{
+    padding: 10px 5px;
+}
+
+
+.ctgry-fltr__item{
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 20px;
+    border:1px solid #3f51b5;
+    color:#111;
+    margin: 5px;
+    background-color: #fff;
+    transition: .25s ease-in-out;
+}
+
+.ctgry-fltr__item--actv{
+    background-color: #607d8b;
+    color: #fff;
+    border-color: #607d8b;
+}

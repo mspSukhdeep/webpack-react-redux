@@ -5,6 +5,9 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
+var ManifestPlugin = require('webpack-manifest-plugin');
+var SWPlugin = require('sw-precache-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     // The entry file. All your app roots from here.
@@ -20,6 +23,49 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
+        new CopyWebpackPlugin([
+        {
+            from: 'app/pwa/', to: ''
+        }
+        ]),
+        new ManifestPlugin({
+            fileName: 'asset-manifest.json'
+        }),
+        new SWPlugin({
+              // By default, a cache-busting query parameter is appended to requests
+              // used to populate the caches, to ensure the responses are fresh.
+              // If a URL is already hashed by Webpack, then there is no concern
+              // about it being stale, and the cache-busting can be skipped.
+              dontCacheBustUrlsMatching: /\.\w{8}\./,
+              filename: 'service-worker.js',
+              stripPrefix: '/Applications/XAMPP/xamppfiles/htdocs/boil_new/webpack-react-redux/dist',
+              replacePrefix: '/m/pwa',
+              logger(message) {
+                if (message.indexOf('Total precache size is') === 0) {
+                  // This message occurs for every build and is a bit too noisy.
+                  return;
+                }
+                console.log(message);
+              },
+              runtimeCaching: [{
+                  //Purge Cache Daily
+                  urlPattern: /https:\/\/sukhd\.com/,
+                  handler: 'cacheFirst'
+              },
+              {
+                  //Cache for longer intervals
+                  urlPattern: /https:\/\/assets\.mspcdn\.net/,
+                  handler: 'cacheFirst'
+              },
+              {
+                  //Do Not Cache - Remove after some time
+                  urlPattern: /https:\/\/res\.cloudinary\.com/,
+                  handler: 'cacheFirst'
+              }],
+              minify: true, // minify and uglify the script
+              navigateFallback: '/index.html',
+              staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+        }),
         // webpack gives your modules and chunks ids to identify them. Webpack can vary the
         // distribution of the ids to get the smallest id length for often used ids with
         // this plugin
@@ -29,7 +75,7 @@ module.exports = {
         // change name because the hash part changes. We want hash name changes to bust cache
         // on client browsers.
         new HtmlWebpackPlugin({
-            template: 'app/index.tpl.html',
+            template: 'app/index.html',
             inject: 'body',
             filename: 'index.html'
         }),
@@ -54,23 +100,7 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('production')
         })
     ],
-
-    // ESLint options
-    eslint: {
-        configFile: '.eslintrc',
-        failOnWarning: false,
-        failOnError: true
-    },
-
     module: {
-        // Runs before loaders
-        preLoaders: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'eslint'
-            }
-        ],
         // loaders handle the assets, like transforming sass to css or jsx to js.
         loaders: [{
             test: /\.js?$/,
@@ -90,6 +120,17 @@ module.exports = {
         }, {
             test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
             loader: 'file'
+        },
+        {
+              test: /\.css$/,
+              loader: 'style-loader'
+        },
+        {
+            test: /\.css$/,
+            loader: 'css-loader',
+            query: {
+                minify: true
+            }
         }]
     },
     postcss: [

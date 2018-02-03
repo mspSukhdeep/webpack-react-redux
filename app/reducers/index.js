@@ -1,20 +1,25 @@
-import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
-import * as types from '../actions/types';
 
-const filter = (state = '', action) => {
-    switch (action.type) {
-        case types.FILTER:
-            return action.filter;
-        default:
-            return state;
-    }
-};
-
+import StoreListReducer from './store_list';
+import OfferListReducer from './offer_list';
+import CategoryOfferListReducer from './category_offer_list';
+import StoreDetailReducer from './store_details';
+import SubCategoryReducer from './sub_category';
+import SubCategoyListReducer from './sub_category_offer';
+import SliderReducer from './slider';
 
 const rootReducer = combineReducers({
-    filter,
-    routing
+    stores: StoreListReducer,
+    offers: OfferListReducer,
+    category: combineReducers({
+        offers: CategoryOfferListReducer,
+        subcategory: combineReducers({
+            data: SubCategoryReducer,
+            offers: SubCategoyListReducer
+        })
+    }),
+    storeDetails: StoreDetailReducer,
+    slider: SliderReducer
 });
 
 export default rootReducer;

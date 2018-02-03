@@ -1,0 +1,99 @@
+.srch-wrpr{
+    padding: 13px 13px 13px 36px;
+    background:#fff url(https://assets.mspcdn.net/f_auto/msp-ui/icons/search-grey-small@2x.png) no-repeat center left 14px / 14px;
+}
+
+.inpt--srch-wrpr{
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    padding: 8px 10px;
+    width: 200px;
+    float: left;
+
+}
+
+.inpt--srch{
+    border:0;
+    outline: none;
+    font-size: 13px;
+    width: 90%;
+}
+
+.srch-optn{
+    display: none;
+    float: right;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 0 10px 20px;
+    background: url('https://assets.mspcdn.net/f_auto/bonus_in/icon/filter.svg') no-repeat center left / 12px;
+}
+.inpt--srch-grp{
+        /* padding-bottom: 5px; */
+}
+
+@keyframes slideUp {
+    from {max-height: 0;}
+    to {max-height: 250px;}
+}
+
+.srch-fltr-item{
+    text-decoration: none;
+    background-color: #fff;
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 30px;
+    border: 1px solid #444;
+    color: #444;
+    margin: 5px;
+    text-transform: uppercase;
+    transition: .2s ease-in-out;
+}
+.srch-fltr-item--more{
+    color: #444;
+    background: url("https://assets.mspcdn.net/f_auto/bonus_in/icon/plus.png") left 8px center / 12px no-repeat rgb(255, 255, 255);
+    border-color: #444;
+    padding-left: 25px;
+}
+
+.srch-fltr-item--less{
+    color: #444;
+    background: url("https://assets.mspcdn.net/f_auto/bonus_in/icon/minus.png") left 8px center / 12px no-repeat rgb(255, 255, 255);
+    border-color: #444;
+    padding-left: 25px;
+}
+
+.srch-fltr-item:active{
+    opacity: .7;
+}
+
+.srch-fltr-item--empty{
+    height: 16px;
+    width: 40px;
+    opacity: .5;
+}
+.srch-wrpr--full .inpt--srch-wrpr{
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border-color: #099181;
+    background: #fff url(https://assets.mspcdn.net/f_auto/msp-ui/icons/search-grey-small@2x.png) no-repeat center left 8px / 14px;
+    padding-left: 30px;
+}
+
+.srch-wrpr--full .inpt--srch{
+
+}
+
+.srch-wrpr--full .srch-optn{
+    display: none;
+}
+
+.fltr-wrpr{
+    padding: 10px;
+}
+
+.fltr-wrpr .srch-fltr-wrpr{
+    height: 88px;
+    overflow: hidden;
+    animation: none;
+}

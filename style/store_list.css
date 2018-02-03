@@ -1,0 +1,17 @@
+.optn-lnk{
+    background-color: #fff;
+    float: left;
+    width: 50%;
+    text-align: center;
+    padding: 12px;
+    box-sizing: border-box;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    border-bottom: 2px solid #dfe1e8;
+}
+
+.optn-lnk--actv{
+    border-bottom: 2px solid #099181;
+    color: #099181;
+}
